@@ -1,0 +1,6 @@
+# virtual env
+venv/
+# vscode workspace
+*.code-workspace
+# pycache
+__pycache__/
