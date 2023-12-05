@@ -8,7 +8,6 @@ baudrate = 115200
 
 pico_vid = "2E8A"  # ベンダーID
 
-
 def main():
     ports = serial.tools.list_ports.comports()
     if ports:
@@ -20,7 +19,7 @@ def main():
                 break
     else:
         print("利用可能なCOMポートが見つかりませんでした。")
-    # return
+    
     try:
         ser = serial.Serial(port, baudrate)
         ser.close()
@@ -30,22 +29,17 @@ def main():
             try:
                 # pass
                 # Arduinoからのデータを受信
-                # data_raw = ser.readline()
-                # data_received = data_raw.decode()
-                # print("Arduinoからのデータ:", data_received)
-                time.sleep(1)  # 適宜適切な待ち時間を設定
+                data_raw = ser.readline()
+                data_received = data_raw.decode()
+                print("Arduinoからのデータ:", data_received)
+                time.sleep(0.1)  # 適宜適切な待ち時間を設定
             except KeyboardInterrupt:
                 print("quit! in")
                 break
-            finally:
-                print("closing in")
-                ser.close()
     except SerialException:
         print("can't open port:"+ser.port)
-    except KeyboardInterrupt:
-        print("quit! out")
     finally:
-        print("closing out")
+        print("closing")
         ser.close()
 
 
