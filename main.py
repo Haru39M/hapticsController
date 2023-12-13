@@ -25,13 +25,17 @@ def main():
         ser.close()
         ser.open()
         print("open >> "+ser.port)
+
+        modulationFreq = input("変調周波数を入力 >> ")
+        ser.write((str(modulationFreq)+'\n').encode())
+        
         while True:
             try:
-                # pass
                 # Arduinoからのデータを受信
                 data_raw = ser.readline()
                 data_received = data_raw.decode()
-                print("Arduinoからのデータ:", data_received)
+                # print("Arduinoからのデータ:", data_received)
+                print("Arduinoからのデータ:", data_raw)
                 time.sleep(0.1)  # 適宜適切な待ち時間を設定
             except KeyboardInterrupt:
                 print("quit! in")
@@ -39,9 +43,10 @@ def main():
     except SerialException:
         print("can't open port:"+ser.port)
     finally:
-        print("closing")
+        print("closing port")
         ser.close()
 
 
 if __name__ == "__main__":
+    # print()
     main()
